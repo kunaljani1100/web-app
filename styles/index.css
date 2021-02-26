@@ -1,0 +1,238 @@
+* {
+    font-family: Arial;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+}
+
+#fih-logo {
+    height: 80px;
+    margin: 1%;
+}
+
+#scu-logo {
+    height: 80px;
+    margin: 1%;
+}
+
+.body-container {
+    background-color: #b30738;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1% 5%;
+}
+
+#login-container {
+    background-color: white;
+    color: black;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4% 6%;
+    margin: 5%;
+}
+
+.dashboard {
+    background-color: white;
+    color: black;
+    border-radius: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80%;
+    width: 100%;
+    padding: 3%;
+}
+
+.admin-dashboard {
+    background-color: white;
+    color: black;
+    border-radius: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 80%;
+    width: 100%;
+    padding: 3%;
+}
+
+#row1 {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-around;
+    width: 100%;
+}
+
+input {
+	background-color: #eee;
+    border: none;
+    border-radius: 5px;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 100%;
+}
+
+button {
+	border-radius: 20px;
+	border: 1px solid #b30738;
+	background-color: #b30738;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+    padding: 12px 45px;
+    margin: 8px 0;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+
+button:active {
+	transform: scale(0.95);
+}
+
+button:focus {
+	outline: none;
+}
+
+button.ghost {
+	background-color: transparent;
+	border-color: #FFFFFF;
+}
+
+#project-info {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.table-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-button {
+    border-radius: 5px;
+	border: 1px solid #b30738;
+	background-color: #b30738;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+    padding: 5px 15px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+
+.edit-button:hover {
+    background-color: #790022;
+}
+
+.edit-button:active {
+	transform: scale(0.95);
+}
+
+.edit-button:focus {
+	outline: none;
+}
+
+.edit-button.ghost {
+	background-color: transparent;
+	border-color: #FFFFFF;
+}
+
+.add-button {
+	border: none;
+	background-color: white;
+	color: #b30738;
+	font-size: 36px;
+	font-weight: bold;
+    padding: 5px 15px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+
+.add-button:hover {
+    color: #790022;
+}
+
+.add-button:active {
+	transform: scale(0.95);
+}
+
+.add-button:focus {
+	outline: none;
+}
+
+.add-button.ghost {
+	background-color: transparent;
+	border-color: #FFFFFF;
+}
+
+.add-person-button {
+	border: none;
+	background-color: white;
+	color: #b30738;
+	font-size: 24px;
+	font-weight: bold;
+    padding: 5px 15px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+
+.add-person-button:hover {
+    color: #790022;
+}
+
+.add-person-button:active {
+	transform: scale(0.95);
+}
+
+.add-person-button:focus {
+	outline: none;
+}
+
+.add-person-button.ghost {
+	background-color: transparent;
+	border-color: #FFFFFF;
+}
+
+#team-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.member-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 400px;
+}
+
+#input-name {
+    margin-right: 5px;
+}
+
+#add-person {
+    align-self: left;
+    font-size: 12px;
+	font-weight: bold;
+    padding: 12px;
+    margin: 8px 0px;
+    width: 250px;
+}
+
+#create-team-submit {
+    align-self: center;
+}

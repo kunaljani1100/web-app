@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FIH Project Planner</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../javascript/project.js"></script>
+</head>
+
+<body>
+    <header>
+        <img id="fih-logo" src="../assets/fih_logo.png" alt="FIH Logo">
+        <img id="scu-logo" src="../assets/scu_logo.png" alt="SCU Logo">
+    </header>
+    <div class="body-container">
+        <h1 id="title">Frugal Innovation Hub Project Planner</h1>
+        <div class="dashboard">
+            <div id="project-info"> 
+                <h2>Add a Team</h2>
+                <input type="text" placeholder="Project Name" id="input-project" required>
+                <input type="text" placeholder="Desciption" id="input-description">
+                <input type="text" placeholder="Success Metrics" id="input-metrics">
+                <div id="team-container"> 
+                    <h3>Team Members:</h3>
+                    <div class="member-input">
+                        <input type="text" placeholder="Name" id="input-name">
+                        <input type="text" placeholder="Email" id="input-email">
+                    </div>
+                </div> 
+                <button type="submit" id="add-person">+ Add Another Member</button>
+                <button type="submit" id="create-team-submit">Create Team</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
