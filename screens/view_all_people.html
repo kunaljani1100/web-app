@@ -5,7 +5,7 @@
     <title>FIH Project Planner</title>
     <link rel="stylesheet" href="../styles/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../javascript/home.js"></script>
+    <script src="../javascript/view_all_people.js"></script>
 </head>
 
 <body>
@@ -16,20 +16,17 @@
     <div class="body-container">
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
         <div class="dashboard">
-            <div class="row">
-                <div class="square" id="view-project">
-                    <h2>View My Project</h2>
-                </div>
-                <div class="square" id="add-deliverable">
-                    <h2>Add New Deliverable</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="square" id="add-cost">
-                    <h2>Add New Cost</h2>
-                </div>
-                <div class="square" id="add-communication">
-                    <h2>Add New Communication</h2>
+            <p class="breadcrumb"><a href="admin_home.html">Home</a> / View People</p>
+                <div id="project-info">
+                    <h2>People</h2>
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Type</th>
+                            <th>Profile</th>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

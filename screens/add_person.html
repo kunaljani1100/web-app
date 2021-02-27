@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FIH Project Planner</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../javascript/add_person.js"></script>
+</head>
+
+<body>
+    <header>
+        <img id="fih-logo" src="../assets/fih_logo.png" alt="FIH Logo">
+        <img id="scu-logo" src="../assets/scu_logo.png" alt="SCU Logo">
+    </header>
+    <div class="body-container">
+        <h1 id="title">Frugal Innovation Hub Project Planner</h1>
+        <div class="dashboard">
+            <p class="breadcrumb"><a href="admin_home.html">Home</a> / Add a Person</p>
+            <h2>Add a Person</h2>
+            <div class="input-form">
+                <input type="text" placeholder="Name" id="input-name" required>
+                <input type="text" placeholder="Header" id="input-profile" required>
+                <input type="text" placeholder="Email" id="input-email" required>
+                <select class="person-select" id="input-type">
+                        <option value="0">Select person type:</option>
+                        <option value="1">Student</option>
+                        <option value="2">Faculty Advisor</option>
+                        <option value="3">Manager</option>
+                        <option value="4">Advisor</option>
+                </select>
+                <input type="text" placeholder="Project Name" id="input-project" required>
+            </div>
+            <button type="submit" id="add-person-submit" class="submit">Add Person</button>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FIH Project Planner</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../javascript/add_communication.js"></script>
+</head>
+
+<body>
+    <header>
+        <img id="fih-logo" src="../assets/fih_logo.png" alt="FIH Logo">
+        <img id="scu-logo" src="../assets/scu_logo.png" alt="SCU Logo">
+    </header>
+    <div class="body-container">
+        <h1 id="title">Frugal Innovation Hub Project Planner</h1>
+        <div class="dashboard">
+            <p class="breadcrumb"><a href="home.html">Home</a> / Add New Communication</p>
+            <h2>Add New Communication</h2>
+            <div class="input-form">
+                <input type="text" placeholder="Sender" id="input-sender" required>
+                <input type="text" placeholder="Receiver" id="input-receiver" required>
+                <textarea type="text" placeholder="Communication Summary" id="input-communication" class="short-answer"></textarea>
+            </div>
+            <button type="submit" id="add-communication-submit" class="submit">Add Communication</button>
+        </div>
+    </div>
+</body>

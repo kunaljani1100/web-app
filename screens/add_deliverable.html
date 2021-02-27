@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FIH Project Planner</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../javascript/add_deliverable.js"></script>
+</head>
+
+<body>
+    <header>
+        <img id="fih-logo" src="../assets/fih_logo.png" alt="FIH Logo">
+        <img id="scu-logo" src="../assets/scu_logo.png" alt="SCU Logo">
+    </header>
+    <div class="body-container">
+        <h1 id="title">Frugal Innovation Hub Project Planner</h1>
+        <div class="dashboard">
+            <p class="breadcrumb"><a href="home.html">Home</a> / Add New Deliverable</p>
+            <h2>Add New Deliverable</h2>
+            <div class="input-form">
+                <input type="text" placeholder="Deliverable Name" id="input-deliverable" required>
+                <input type="text" placeholder="Owner" id="input-owner" required>
+                <textarea type="text" placeholder="Description" id="input-description" class="short-answer"></textarea>
+                <input type="text" placeholder="Deadline" id="input-deadline" required>
+            </div>
+            <button type="submit" id="add-deliverable-submit" class="submit">Add Deliverable</button>
+        </div>
+    </div>
+</body>

@@ -1,6 +1,19 @@
 $(document).ready(function() {
-    $("#add-team-button").on("click", (e) => {
+    // regular user
+    $("#view-project").on("click", (e) => {
         e.preventDefault();
-        window.location.href = "add-team.html";
+        window.location.href = "view_project.html";
+    })
+    $("#add-deliverable").on("click", (e) => {
+        e.preventDefault();
+        window.location.href = "add_deliverable.html";
+    })
+    $("#add-cost").on("click", (e) => {
+        e.preventDefault();
+        window.location.href = "add_cost.html";
+    })
+    $("#add-communication").on("click", (e) => {
+        e.preventDefault();
+        window.location.href = "add_communication.html";
     })
 });

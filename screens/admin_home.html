@@ -5,7 +5,7 @@
     <title>FIH Project Planner</title>
     <link rel="stylesheet" href="../styles/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../javascript/home.js"></script>
+    <script src="../javascript/admin_home.js"></script>
 </head>
 
 <body>
@@ -16,21 +16,21 @@
     <div class="body-container">
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
         <div class="admin-dashboard">
-            <div id="project-info"> 
-                <div class="table-header">
-                    <h2>Teams</h2>
-                    <button class="add-button" id="add-team-button" type="submit">+</button>
+            <div class="row">
+                <div class="square" id="create-project">
+                    <h2>Create New Project</h2>
                 </div>
-                <h3>[Project Name]</h3>
-                <p>[Description]</p>
-                <p>[Outcome]</p>
-                <div class="table-header">
-                    <p>Team Members:</p>
-                    <button class="add-person-button" type="submit">+</button>
+                <div class="square" id="add-person">
+                    <h2>Add New Person</h2>
                 </div>
-                <ul>
-                    <li>[team member]</li>
-                </ul>
+            </div>
+            <div class="row">
+                <div class="square" id="view-projects">
+                    <h2>View Projects</h2>
+                </div>
+                <div class="square" id="view-people">
+                    <h2>View People</h2>
+                </div>
             </div>
         </div>
     </div>
