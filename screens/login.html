@@ -5,7 +5,19 @@
     <title>FIH Project Planner</title>
     <link rel="stylesheet" href="../styles/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../javascript/login.js"></script>
+    <script>
+    $(document).ready(function(){
+      $("button").click(function(){
+        $.post("http://localhost:8080/login",
+        {
+           "user_id": document.getElementById("user_id").value,
+           "password": document.getElementById("password").value
+        });
+        alert("Login successful");
+        window.location.href = "admin_home.html";
+      });
+    });
+    </script>
 </head>
 
 <body>
@@ -17,8 +29,8 @@
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
         <div id="login-container">
             <h2>Log In</h2>
-            <input type="text" placeholder="Email" id="input-email" required>
-            <input type="password" placeholder="Password" id="input-password" required>
+            <input type="text" placeholder="Username" id="user_id" name="user_id" required>
+            <input type="password" placeholder="Password" id="password" name="password" required>
             <button type="submit" id="login-submit">Log In</button>
         </div>
     </div>
