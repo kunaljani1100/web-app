@@ -16,10 +16,10 @@
            "project_name": document.getElementById("project_name").value,
            "description": document.getElementById("description").value,
            "success_metrics": document.getElementById("success_metrics").value
-        },
-        function(data,status){
-          alert("Data: " + data + "\nStatus: " + status);
         });
+        alert("hello");
+        alert("project successfully created");
+        window.location.href = "view_all_projects.html";
       });
     });
     </script>
