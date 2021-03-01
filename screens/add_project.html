@@ -10,15 +10,19 @@
     <script>
     $(document).ready(function(){
       $("button").click(function(){
-        $.post("http://localhost:8080/create_project",
+        const response = $.post("http://localhost:8080/create_project",
         {
-           "person_id": document.getElementById("person_id").value,
+          "person_id": document.getElementById("person_id").value,
            "project_name": document.getElementById("project_name").value,
            "description": document.getElementById("description").value,
            "success_metrics": document.getElementById("success_metrics").value
+        },
+        function(response){
+            alert(response["message"]);
+            if(response["message"].includes("successfully created")){
+              window.location.href = "home.html";
+            }
         });
-        alert("Project successfully created");
-        window.location.href = "view_all_projects.html";
       });
     });
     </script>
