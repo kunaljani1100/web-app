@@ -8,13 +8,20 @@
     <script>
     $(document).ready(function(){
       $("button").click(function(){
-        $.post("http://localhost:8080/login",
+        const response = $.post("http://localhost:8080/login",
         {
            "user_id": document.getElementById("user_id").value,
            "password": document.getElementById("password").value
+        },
+        function(response){
+            if(response["message"] == "login successful"){
+              alert("Login successful.");
+              window.location.href = "admin_home.html";
+            }
+            else {
+              alert("Login failed.")
+            }
         });
-        alert("Login successful");
-        window.location.href = "admin_home.html";
       });
     });
     </script>
@@ -31,7 +38,7 @@
             <h2>Log In</h2>
             <input type="text" placeholder="Username" id="user_id" name="user_id" required>
             <input type="password" placeholder="Password" id="password" name="password" required>
-            <button type="submit" id="login-submit">Log In</button>
+            <button>Log In</button>
         </div>
     </div>
 </body>
