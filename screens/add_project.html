@@ -9,13 +9,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
     $(document).ready(function(){
+      var person_id = localStorage.getItem("person_id");
       $("button").click(function(){
         const response = $.post("http://localhost:8080/create_project",
         {
-          "person_id": document.getElementById("person_id").value,
-           "project_name": document.getElementById("project_name").value,
-           "description": document.getElementById("description").value,
-           "success_metrics": document.getElementById("success_metrics").value
+          "person_id": person_id,
+          "project_name": document.getElementById("project_name").value,
+          "description": document.getElementById("description").value,
+          "success_metrics": document.getElementById("success_metrics").value
         },
         function(response){
             alert(response["message"]);
@@ -36,10 +37,10 @@
     <div class="body-container">
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
         <div class="dashboard">
-            <p class="breadcrumb"><a href="admin_home.html">Home</a> / Add a Project</p>
+            <p class="breadcrumb"><a href="home.html">Home</a> / Add a Project</p>
             <h2>Add a Project</h2>
             <div class="input-form">
-              <input type="hidden" value="person-g2nSBbuI" id="person_id" name="person_id">
+              <!-- <input type="hidden" value="person-g2nSBbuI" id="person_id" name="person_id"> -->
                 <input type="text" placeholder="Project Name" id="project_name" name="project_name" required>
                 <textarea type="text" placeholder="Description" id="description" name="description" class="short-answer"></textarea>
                 <textarea type="text" placeholder="Success Metrics" id="success_metrics" name="success_metrics" class="short-answer"></textarea>

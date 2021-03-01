@@ -16,7 +16,9 @@
         function(response){
             if(response["message"] == "login successful"){
               alert("Login successful.");
-              window.location.href = "admin_home.html";
+              var person_id = "person-g2nSBbuI"; 
+              localStorage.setItem("person_id", person_id);
+              window.location.href = "home.html";
             }
             else {
               alert("Login failed.")

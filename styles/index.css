@@ -168,6 +168,12 @@ table th {
     text-align: left;
     background-color: #b30738;
     color: white;
+    border-color: black;
+}
+
+.table-cell th {
+    background-color: white;
+    color: black;
 }
 
 .edit-button {
