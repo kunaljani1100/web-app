@@ -5,7 +5,44 @@
     <title>FIH Project Planner</title>
     <link rel="stylesheet" href="../styles/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../javascript/view_project.js"></script>
+    <script>
+    $(document).ready(function() {
+        var project_id = localStorage.getItem("project_id");
+        console.log("Project ID = " + project_id);
+        var name;
+        var projects = [];
+
+        $.ajax({
+            url: 'http://localhost:8080/projects/' + project_id,
+            type: 'get',
+            success: function(data, response) {
+                var msg = "";
+                if(response) {
+                    msg = "Project retrieved successfully!";
+                    projects = data.projects;
+                } else {
+                    msg = "Error retrieving project.";
+                }
+                alert(msg);
+
+                projects.forEach(project => {
+                    name = project.projectName;
+                    outcome = project.outcome;
+                    description = project.description;
+                    var deliverables = project.deliverables;
+                    $("#project-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +description+ '</th><th>' + outcome + '</th></tr>');
+                    deliverables.forEach(deliverable => $("#deliverables table").append('<tr class="table-cell"><th>' + deliverable.deliverableName + '</th><th>' + deliverable.deliverableDescription + '</th><th>' + deliverable.leader + '</th><th>' + deliverable.deadline + '</th></tr>'));
+                });
+
+                $("button").click(function(){
+                  localStorage.setItem("project_id",alert($(this).val()));
+                  window.location.href = "home.html";
+                });
+            }
+        });
+
+    });
+    </script>
 </head>
 
 <body>
@@ -35,7 +72,7 @@
                 </div>
             </div>
             <div class="row">
-                <div id="deliverables"> 
+                <div id="deliverables">
                     <h2>Deliverables</h2>
                     <table>
                         <tr class="table-header">
@@ -52,7 +89,7 @@
                         </tr> -->
                     </table>
                 </div>
-                <!-- <div id="budget"> 
+                <!-- <div id="budget">
                     <h2>Budget</h2>
                     <table>
                         <tr>

@@ -10,6 +10,7 @@
     <script>
     $(document).ready(function(){
       var person_id = localStorage.getItem("person_id");
+      alert(person_id)
       $("button").click(function(){
         const response = $.post("http://localhost:8080/create_project",
         {
@@ -21,7 +22,7 @@
         function(response){
             alert(response["message"]);
             if(response["message"].includes("successfully created")){
-              window.location.href = "home.html";
+              window.location.href = "admin_home.html";
             }
         });
       });
@@ -37,7 +38,7 @@
     <div class="body-container">
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
         <div class="dashboard">
-            <p class="breadcrumb"><a href="home.html">Home</a> / Add a Project</p>
+            <p class="breadcrumb"><a href="admin_home.html">Home</a> / Add a Project</p>
             <h2>Add a Project</h2>
             <div class="input-form">
               <!-- <input type="hidden" value="person-g2nSBbuI" id="person_id" name="person_id"> -->

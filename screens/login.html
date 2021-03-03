@@ -16,12 +16,13 @@
         function(response){
             if(response["message"] == "login successful"){
               alert("Login successful.");
-              var person_id = "person-g2nSBbuI"; 
-              localStorage.setItem("person_id", person_id);
-              window.location.href = "home.html";
+              var personId = response["person_id"];
+              localStorage.setItem("person_id", personId);
+              alert(localStorage.getItem("person_id"))
+              window.location.href = "admin_home.html";
             }
             else {
-              alert("Login failed.")
+              alert("Login failed.");
             }
         });
       });

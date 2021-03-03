@@ -5,7 +5,32 @@
     <title>FIH Project Planner</title>
     <link rel="stylesheet" href="../styles/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../javascript/home.js"></script>
+    <script>
+    $(document).ready(function() {
+
+        // regular user
+        $("#add-project").on("click", (e) => {
+            e.preventDefault();
+            window.location.href = "add_project.html";
+        })
+        $("#view-project").on("click", (e) => {
+            e.preventDefault();
+            window.location.href = "view_project.html";
+        })
+        $("#add-deliverable").on("click", (e) => {
+            e.preventDefault();
+            window.location.href = "add_deliverable.html";
+        })
+        $("#add-communication").on("click", (e) => {
+            e.preventDefault();
+            window.location.href = "add_communication.html";
+        })
+        // $("#add-communication").on("click", (e) => {
+        //     e.preventDefault();
+        //     window.location.href = "add_communication.html";
+        // })
+    });
+    </script>
 </head>
 
 <body>
@@ -15,6 +40,7 @@
     </header>
     <div class="body-container">
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
+        <a href="admin_home.html">Admin Home</a>
         <div class="dashboard">
             <div class="row">
                 <div class="square" id="add-project">

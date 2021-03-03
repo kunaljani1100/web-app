@@ -4,27 +4,6 @@ $(document).ready(function() {
     var name;
     var projects = [];
 
-    // var project = "Test Project";
-    // var description = "Test description";
-    // var metrics = "Test success metrics";
-    // var deliverables = [
-    //     {
-    //         name: "Deliverable 1",
-    //         description: "Deliverable description",
-    //         leader: "Deliverable leader",
-    //         deadline: "Deadline"
-    //     },
-    //     {
-    //         name: "Deliverable 2",
-    //         description: "Deliverable description",
-    //         leader: "Deliverable leader",
-    //         deadline: "Deadline"
-    //     }
-    // ];
-
-    // $("#project-info table").append('<tr class="table-cell"><th>' + project + '</th><th>' + description + '</th><th>' + metrics + '</th></tr>');
-    // deliverables.forEach(deliverable => $("#deliverables table").append('<tr class="table-cell"><th>' + deliverable.name + '</th><th>' + deliverable.description + '</th><th>' + deliverable.leader + '</th><th>' + deliverable.deadline + '</th></tr>'));
-
     $.ajax({
         url: 'http://localhost:8080/get_projects_by_person_id/' + person_id,
         type: 'get',
@@ -41,10 +20,17 @@ $(document).ready(function() {
             projects.forEach(project => {
                 name = project.projectName;
                 outcome = project.outcome;
+                description = project.description;
                 var deliverables = project.deliverables;
-                $("#project-info table").append('<tr class="table-cell"><th>' + name + '</th><th> </th><th>' + outcome + '</th></tr>');
+                $("#project-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +description+ '</th><th>' + outcome + '</th><th>' + '<button value = ' + project.projectId + '>View Project</button>' + '</th></tr>');
                 deliverables.forEach(deliverable => $("#deliverables table").append('<tr class="table-cell"><th>' + deliverable.deliverableName + '</th><th>' + deliverable.deliverableDescription + '</th><th>' + deliverable.leader + '</th><th>' + deliverable.deadline + '</th></tr>'));
+            });
+
+            $("button").click(function(){
+              localStorage.setItem("project_id",alert($(this).val()));
+              window.location.href = "home.html";
             });
         }
     });
+
 });
