@@ -30,8 +30,10 @@
                     outcome = project.outcome;
                     description = project.description;
                     var deliverables = project.deliverables;
+                    var people = project.people;
                     $("#project-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +description+ '</th><th>' + outcome + '</th></tr>');
                     deliverables.forEach(deliverable => $("#deliverables table").append('<tr class="table-cell"><th>' + deliverable.deliverableName + '</th><th>' + deliverable.deliverableDescription + '</th><th>' + deliverable.leader + '</th><th>' + deliverable.deadline + '</th></tr>'));
+                    people.forEach(person => $("#people table").append('<tr class="table-cell"><th>' + person.userId + '</th></tr>'));
                 });
 
                 $("button").click(function(){
@@ -89,6 +91,23 @@
                         </tr> -->
                     </table>
                 </div>
+              </div>
+                <div class="row">
+                  <div id="people">
+                      <h2>People</h2>
+                      <table>
+                          <tr class="table-header">
+                              <th>People</th>
+                          </tr>
+                          <!-- <tr class="table-cell">
+                              <th class="deliverable_name"></th>
+                              <th class="deliverable_descrption"></th>
+                              <th class="leader"></th>
+                              <th class="deadline"></th>
+                          </tr> -->
+                      </table>
+                  </div>
+              </div>
                 <!-- <div id="budget">
                     <h2>Budget</h2>
                     <table>

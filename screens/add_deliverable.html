@@ -5,7 +5,77 @@
     <title>FIH Project Planner</title>
     <link rel="stylesheet" href="../styles/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../javascript/add_deliverable.js"></script>
+    <script>
+    $(document).ready(function() {
+      var project_id = localStorage.getItem("project_id");
+      var url = "http://localhost:8080/projects/" + project_id;
+      var projects = [];
+      $.ajax({
+          url: url,
+          type: 'get',
+          success: function(response, data) {
+            var msg = "";
+            if(response) {
+                msg = "Project retrieved successfully!";
+                projects = response["projects"];
+            } else {
+                msg = "Error retrieving project.";
+            }
+            alert(msg);
+            projects.forEach(project => {
+                var people = project["people"];
+                people.forEach(person=>{
+                  $("#input-owner").append("<option value=" + person["personId"] +">"+person["userId"]+"</option>");
+                });
+            });
+          }
+      });
+        $("#add-deliverable-submit").on("click", (e) => {
+            e.preventDefault();
+            var person_id = localStorage.getItem("person_id");
+            var project_id = localStorage.getItem("project_id");
+
+            $.ajax({
+                url: 'localhost:8080/get_projects_by_person_id/' + person_id,
+                type: 'get',
+                success: function(response, data) {
+                    var msg = "";
+                    if(response) {
+                        msg = "Project ID retrieved successfully!";
+                        project_id = data.project_id;
+                    } else {
+                        msg = "Error retrieving project ID.";
+                    }
+                    alert(msg);
+                }
+            });
+
+            var name = $("#input-deliverable").val();
+            var leader = $("#input-owner").val();
+            var description = $("#input-description").val();
+            var deadline = $("#input-deadline").val();
+
+            $.post("http://localhost:8080/add_deliverable_to_project",
+            {
+                "project_id": project_id,
+                "leader": leader,
+                "name": name,
+                "description": description,
+                "deadline": deadline
+            },
+            function(response) {
+                var msg = "";
+                if(response) {
+                    msg = "Deliverable created successfully!";
+                    window.location.href = "home.html";
+                } else {
+                    msg = "Error creating deliverable.";
+                }
+                alert(msg);
+            });
+        })
+    });
+    </script>
 </head>
 
 <body>
@@ -20,7 +90,9 @@
             <h2>Add New Deliverable</h2>
             <div class="input-form">
                 <input type="text" placeholder="Deliverable Name" id="input-deliverable" required>
-                <input type="text" placeholder="Owner" id="input-owner" required>
+                <select id="input-owner" name="owner">
+
+                </select>
                 <textarea type="text" placeholder="Description" id="input-description" class="short-answer"></textarea>
                 <input type="date" id="start" name="trip-start" value="2021-03-01"
                     min="2021-01-01" max="2021-12-31" placeholder="Deadline" id="input-deadline" required>
