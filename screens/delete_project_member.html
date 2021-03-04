@@ -34,12 +34,21 @@
                     var people = project.people;
                     $("#project-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +description+ '</th><th>' + outcome + '</th></tr>');
                     deliverables.forEach(deliverable => $("#deliverables table").append('<tr class="table-cell"><th>' + deliverable.deliverableName + '</th><th>' + deliverable.deliverableDescription + '</th><th>' + deliverable.leader + '</th><th>' + deliverable.deadline + '</th></tr>'));
-                    people.forEach(person => $("#people table").append('<tr class="table-cell"><th>' + person.userId + '</th></tr>'));
+                    people.forEach(person => $("#people table").append('<tr class="table-cell"><th>' + person.userId + '</th><th> <button value = '+person.personId+'> x </button>'+ '</th></tr>'));
                 });
 
                 $("button").click(function(){
-                  localStorage.setItem("project_id",alert($(this).val()));
-                  window.location.href = "home.html";
+                  $.ajax({
+                    url: 'http://localhost:8080/pop_project_member/' +project_id+ '/'+ $(this).val(),
+                    type:'delete',
+                    success:function(response){
+                      if(response){
+                        alert(response["message"]);
+                        window.location.href = "view_project.html";
+                      }
+                    }
+                  });
+
                 });
             }
         });
@@ -56,9 +65,8 @@
     <div class="body-container" id = "body-container">
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
         <div class="dashboard">
-            <p class="breadcrumb"><a href="home.html">Home</a> / View Project</p>
-            <a href="delete_deliverable.html">Delete deliverable</a>
-            <a href="delete_project_member.html">Delete person</a>
+            <p class="breadcrumb"><a href="home.html">Home</a> / Delete member</p>
+            <a href="view_project.html">View Project</a>
             <div class="row">
                 <div id="project-info">
                     <h2>Project Info</h2>
@@ -85,6 +93,7 @@
                             <th>Description</th>
                             <th>Leader</th>
                             <th>Deadline</th>
+                            <th>Remove Deliverable</th>
                         </tr>
                         <!-- <tr class="table-cell">
                             <th class="deliverable_name"></th>
@@ -101,6 +110,7 @@
                       <table>
                           <tr class="table-header">
                               <th>People</th>
+                              <th>Remove Person</th>
                           </tr>
                           <!-- <tr class="table-cell">
                               <th class="deliverable_name"></th>

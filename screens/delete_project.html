@@ -30,13 +30,21 @@
                     outcome = project.outcome;
                     description = project.description;
                     var deliverables = project.deliverables;
-                    $("#project-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +description+ '</th><th>' + outcome + '</th><th>' + '<button value = ' + project.projectId + '>View Project</button>' + '</th></tr>');
+                    $("#project-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +description+ '</th><th>' + outcome + '</th><th>' + '<button value = ' + project.projectId + '> x </button>' + '</th></tr>');
                     deliverables.forEach(deliverable => $("#deliverables table").append('<tr class="table-cell"><th>' + deliverable.deliverableName + '</th><th>' + deliverable.deliverableDescription + '</th><th>' + deliverable.leader + '</th><th>' + deliverable.deadline + '</th></tr>'));
                 });
 
                 $("button").click(function(){
-                  localStorage.setItem("project_id",$(this).val());
-                  window.location.href = "home.html";
+                    $.ajax({
+                      url: 'http://localhost:8080/delete_project/' + $(this).val(),
+                      type:'delete',
+                      success:function(data,response){
+                        if(response){
+                          alert("Project deleted successfully");
+                          window.location.href = "view_all_projects.html";
+                        }
+                      }
+                    });
                 });
 
             }
@@ -54,8 +62,8 @@
     <div class="body-container">
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
         <div class="dashboard">
-            <p class="breadcrumb"><a href="admin_home.html">Home</a> / View Project</p>
-            <a href="delete_project.html">Delete Project</a>
+            <p class="breadcrumb"><a href="admin_home.html">Home</a> / Delete Project</p>
+            <a href="view_all_projects.html">View Project</a>
                 <div id="project-info">
                     <h2>Projects</h2>
                     <table>
@@ -63,7 +71,7 @@
                             <th>Name</th>
                             <th>Description</th>
                             <th>Success Metrics</th>
-                            <th>Go To Project</th>
+                            <th>Delete Project</th>
                         </tr>
                     </table>
                 </div>
