@@ -6,6 +6,43 @@
     <link rel="stylesheet" href="../styles/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../javascript/add_person.js"></script>
+    <script>
+    $(document).ready(function() {
+        $("#add-person-submit").on("click", (e) => {
+            e.preventDefault();
+
+            var name = $("#input-name").val().trim();
+            var profile = $("#input-profile").val().trim();
+            var email = $("#input-email").val().trim();
+            var userId = $("#input-user_id").val().trim();
+            var type = $("#input-type").val().trim();
+            var password = $("#input-password").val().trim();
+
+                $.ajax({
+                    url: 'http://localhost:8080/add_person',
+                    type:'post',
+                    data: {
+                        name: name,
+                        profile: profile,
+                        email_id: email,
+                        type: type,
+                        user_id: userId,
+                        password: password
+                    },
+                    success: function(response) {
+                      if(response["message"] == "Successfully registered"){
+                        alert("Successfully registered");
+                        window.location.href = "login.html";
+                      }
+                      else{
+                        alert("User exists");
+                      }
+                    }
+                });
+
+        })
+    });
+    </script>
 </head>
 
 <body>
@@ -20,8 +57,9 @@
             <h2>Add a Person</h2>
             <div class="input-form">
                 <input type="text" placeholder="Name" id="input-name" required>
-                <input type="text" placeholder="Header" id="input-profile" required>
+                <input type="text" placeholder="Profile" id="input-profile" required>
                 <input type="text" placeholder="Email" id="input-email" required>
+                <input type="text" placeholder="Userid" id="input-user_id" required>
                 <select class="person-select" id="input-type">
                         <option value="0">Select person type:</option>
                         <option value="1">Student</option>
@@ -29,7 +67,7 @@
                         <option value="3">Manager</option>
                         <option value="4">Advisor</option>
                 </select>
-                <input type="text" placeholder="Project Name" id="input-project" required>
+                <input type="password" placeholder="Password" id="input-password" required>
             </div>
             <button type="submit" id="add-person-submit" class="submit">Add Person</button>
         </div>

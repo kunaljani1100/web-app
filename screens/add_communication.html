@@ -5,7 +5,60 @@
     <title>FIH Project Planner</title>
     <link rel="stylesheet" href="../styles/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../javascript/add_communication.js"></script>
+    <script>
+    $(document).ready(function() {
+      $("#body-container").append("<h1>" + localStorage.getItem("project_id") + "</h1>")
+      var project_id = localStorage.getItem("project_id");
+      var url = "http://localhost:8080/projects/" + project_id;
+      var projects = [];
+      $.ajax({
+          url: url,
+          type: 'get',
+          success: function(response, data) {
+            var msg = "";
+            if(response) {
+                msg = "Project retrieved successfully!";
+                projects = response["projects"];
+            } else {
+                msg = "Error retrieving project.";
+            }
+            alert(msg);
+            projects.forEach(project => {
+                var people = project["people"];
+                people.forEach(person=>{
+                  $("#input-receiver").append("<option value=" + person["personId"] +">"+person["userId"]+"</option>");
+                });
+            });
+          }
+      });
+        $("#add-communication-submit").on("click", (e) => {
+            e.preventDefault();
+
+            // var person_id = localStorage.getItem("person_id");
+
+            var sender = localStorage.getItem("person_id");
+            var receiver = $("#input-receiver").val();
+            var summary = $("#input-summary").val();
+
+            $.post("http://localhost:8080/add_communication",
+            {
+                "sender": sender,
+                "receiver": receiver,
+                "summary": summary
+            },
+            function(response) {
+                var msg = "";
+                if(response) {
+                    msg = "Communication created successfully!";
+                    window.location.href = "home.html";
+                } else {
+                    msg = "Error creating communication.";
+                }
+                alert(msg);
+            });
+        })
+    });
+    </script>
 </head>
 
 <body>
@@ -13,15 +66,16 @@
         <img id="fih-logo" src="../assets/fih_logo.png" alt="FIH Logo">
         <img id="scu-logo" src="../assets/scu_logo.png" alt="SCU Logo">
     </header>
-    <div class="body-container">
+    <div class="body-container" id = "body-container">
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
         <div class="dashboard">
             <p class="breadcrumb"><a href="home.html">Home</a> / Add New Communication</p>
             <h2>Add New Communication</h2>
             <div class="input-form">
-                <input type="text" placeholder="Sender" id="input-sender" required>
-                <input type="text" placeholder="Receiver" id="input-receiver" required>
-                <textarea type="text" placeholder="Communication Summary" id="input-communication" class="short-answer"></textarea>
+              <select id="input-receiver" name="Receiver">
+
+              </select>
+                <textarea type="text" placeholder="Communication Summary" id="input-summary" class="short-answer"></textarea>
             </div>
             <button type="submit" id="add-communication-submit" class="submit">Add Communication</button>
         </div>

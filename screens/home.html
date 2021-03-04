@@ -8,10 +8,11 @@
     <script>
     $(document).ready(function() {
 
+        $("#body-container").append("<h1>" + localStorage.getItem("project_id") + "</h1>")
         // regular user
-        $("#add-project").on("click", (e) => {
+        $("#add-person-to-project").on("click", (e) => {
             e.preventDefault();
-            window.location.href = "add_person_to_project.html";
+            window.location.href = "add_people_to_project.html";
         })
         $("#view-project").on("click", (e) => {
             e.preventDefault();
@@ -24,6 +25,10 @@
         $("#add-communication").on("click", (e) => {
             e.preventDefault();
             window.location.href = "add_communication.html";
+        })
+        $("#view_communication").on("click", (e) => {
+            e.preventDefault();
+            window.location.href = "view_communication.html";
         })
         // $("#add-communication").on("click", (e) => {
         //     e.preventDefault();
@@ -38,7 +43,7 @@
         <img id="fih-logo" src="../assets/fih_logo.png" alt="FIH Logo">
         <img id="scu-logo" src="../assets/scu_logo.png" alt="SCU Logo">
     </header>
-    <div class="body-container">
+    <div class="body-container" id = "body-container">
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
         <a href="admin_home.html">Admin Home</a>
         <div class="dashboard">
@@ -56,6 +61,11 @@
                 </div>
                 <div class="square" id="add-communication">
                     <h2>Add New Communication</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="square" id="view_communication">
+                    <h2>View Communication</h2>
                 </div>
             </div>
         </div>
