@@ -9,27 +9,24 @@
     $(document).ready(function() {
 
         $.ajax({
-            url: 'http://localhost:8080/get_people/',
+            url: 'http://localhost:8080/get_communication/' +localStorage.getItem("person_id") +"/"+localStorage.getItem("project_id"),
             type: 'get',
             success: function(data, response) {
                 var msg = "";
                 var users = [];
                 if(response) {
-                    msg = "List of people retrieved successfully!";
-                    people = response["result"];
-                    users = data.result;
+                    msg = "List of comminications successfully!";
+                    communications = data.result;
                 } else {
                     msg = "Error retrieving people.";
                 }
                 alert(msg);
                 alert(users);
 
-                users.forEach(person => {
-                    name = person.name;
-                    emailId = person.emailId;
-                    type = person.type;
-                    profile = person.profile;
-                    $("#people-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +emailId+ '</th><th>' + type + '</th><th>' + profile + '</th></tr>');
+                communications.forEach(communication => {
+                    name = communication.receiver[0].userId;
+                    summary = communication.summary;
+                    $("#communication-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +summary+ '</th></tr>');
                 });
             }
         });
@@ -46,15 +43,13 @@
     <div class="body-container">
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
         <div class="dashboard">
-            <p class="breadcrumb"><a href="admin_home.html">Home</a> / View People</p>
-                <div id="people-info">
-                    <h2>People</h2>
+            <p class="breadcrumb"><a href="home.html">Home</a> / View Communication</p>
+                <div id="communication-info">
+                    <h2>Communication</h2>
                     <table>
                         <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Type</th>
-                            <th>Profile</th>
+                            <th>Receiver</th>
+                            <th>Summary</th>
                         </tr>
                     </table>
                 </div>

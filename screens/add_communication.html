@@ -36,12 +36,14 @@
 
             // var person_id = localStorage.getItem("person_id");
 
+            var project_id = localStorage.getItem("project_id");
             var sender = localStorage.getItem("person_id");
             var receiver = $("#input-receiver").val();
             var summary = $("#input-summary").val();
-
+            
             $.post("http://localhost:8080/add_communication",
             {
+                "project_id": project_id,
                 "sender": sender,
                 "receiver": receiver,
                 "summary": summary
