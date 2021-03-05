@@ -32,7 +32,9 @@
                     success: function(response) {
                       if(response["message"] == "Successfully registered"){
                         alert("Successfully registered");
-                        window.location.href = "login.html";
+                        localStorage.setItem("verification_code",response["verification_code"]);
+                        localStorage.setItem("new_user_id",userId);
+                        window.location.href = "account_verification.html";
                       }
                       else{
                         alert("User exists");
@@ -53,7 +55,7 @@
     <div class="body-container">
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
         <div class="dashboard">
-            <p class="breadcrumb"><a href="admin_home.html">Home</a> / Add a Person</p>
+            <p class="breadcrumb"> Add a Person</p>
             <h2>Add a Person</h2>
             <div class="input-form">
                 <input type="text" placeholder="Name" id="input-name" required>
