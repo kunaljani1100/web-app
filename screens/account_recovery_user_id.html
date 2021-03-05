@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FIH Project Planner</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../javascript/add_person.js"></script>
+    <script>
+    $(document).ready(function() {
+        $("#account-verify").on("click", (e) => {
+            e.preventDefault();
+
+            var userId = $("#input-user_id").val().trim();
+
+                $.ajax({
+                    url: 'http://localhost:8080/account_recovery',
+                    type:'post',
+                    data: {
+                        user_id: userId,
+                        code:"code"
+                    },
+                    success: function(response) {
+                      if(response["message"] == "User exists."){
+                        alert("User exists");
+                        localStorage.setItem("account_recovery_verification_code",response["verification_code"]);
+                        localStorage.setItem("account_recovery_user_id",userId);
+                        window.location.href = "recovery_credentials_input.html";
+                      }
+                      else{
+                        alert("User does not exist.");
+                      }
+                    }
+                });
+
+        })
+    });
+    </script>
+</head>
+
+<body>
+    <header>
+        <img id="fih-logo" src="../assets/fih_logo.png" alt="FIH Logo">
+        <img id="scu-logo" src="../assets/scu_logo.png" alt="SCU Logo">
+    </header>
+    <div class="body-container">
+        <h1 id="title">Frugal Innovation Hub Project Planner</h1>
+        <div class="dashboard">
+            <p class="breadcrumb"> Account Recovery
+            <h2>Account Recovery</h2>
+            <div class="input-form">
+                <input type="text" placeholder="User ID" id="input-user_id" required>
+            </div>
+            <button type="submit" id="account-verify" class="submit">Send verification code to email</button>
+        </div>
+    </div>
+</body>
