@@ -24,16 +24,16 @@
                 } else {
                     msg = "Error retrieving project.";
                 }
-                alert(msg);
+                //alert(msg);
 
                 projects.forEach(project => {
                     name = project.projectName;
-                    outcome = project.outcome;
+                    outcome = project.successMetrics;
                     description = project.description;
                     var deliverables = project.deliverables;
                     var people = project.people;
                     $("#project-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +description+ '</th><th>' + outcome + '</th></tr>');
-                    deliverables.forEach(deliverable => $("#deliverables table").append('<tr class="table-cell"><th>' + deliverable.deliverableName + '</th><th>' + deliverable.deliverableDescription + '</th><th>' + deliverable.leader + '</th><th>' + deliverable.deadline + '</th></tr>'));
+                    deliverables.forEach(deliverable => $("#deliverables table").append('<tr class="table-cell"><th>' + deliverable.deliverableName + '</th><th>' + deliverable.deliverableDescription + '</th><th>' + deliverable.leader + '</th></tr>'));
                     people.forEach(person => $("#people table").append('<tr class="table-cell"><th>' + person.userId + '</th><th> <button value = '+person.personId+'> x </button>'+ '</th></tr>'));
                 });
 
@@ -92,8 +92,6 @@
                             <th>Deliverable</th>
                             <th>Description</th>
                             <th>Leader</th>
-                            <th>Deadline</th>
-                            <th>Remove Deliverable</th>
                         </tr>
                         <!-- <tr class="table-cell">
                             <th class="deliverable_name"></th>

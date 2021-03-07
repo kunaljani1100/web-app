@@ -14,7 +14,7 @@
             var verificationCode = $("#verification-code").val().trim();
 
             if(verificationCode == localStorage.getItem("verification_code")){
-              alert("Verification successful.")
+              //alert("Verification successful.")
               $.ajax({
                   url: 'http://localhost:8080/verify_user',
                   type:'post',

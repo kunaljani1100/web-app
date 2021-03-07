@@ -23,11 +23,11 @@
                 } else {
                     msg = "Error retrieving project.";
                 }
-                alert(msg);
+                //alert(msg);
 
                 projects.forEach(project => {
                     name = project.projectName;
-                    outcome = project.outcome;
+                    outcome = project.successMetrics;
                     description = project.description;
                     var deliverables = project.deliverables;
                     $("#project-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +description+ '</th><th>' + outcome + '</th><th>' + '<button value = ' + project.projectId + '>View Project</button>' + '</th></tr>');

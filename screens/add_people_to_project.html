@@ -22,8 +22,8 @@
                 } else {
                     msg = "Error retrieving people.";
                 }
-                alert(msg);
-                alert(users);
+                //alert(msg);
+                //alert(users);
 
                 users.forEach(person => {
                     personId = person.personId;
@@ -35,8 +35,8 @@
                 });
 
                 $("button").click(function(){
-                  alert($(this).val());
-                  alert(localStorage.getItem("project_id"));
+                  //alert($(this).val());
+                  //alert(localStorage.getItem("project_id"));
 
                   const response = $.post("http://localhost:8080/add_person_to_project",
                   {

@@ -10,7 +10,7 @@
     <script>
     $(document).ready(function(){
       var person_id = localStorage.getItem("person_id");
-      alert(person_id)
+      //alert(person_id)
       $("button").click(function(){
         const response = $.post("http://localhost:8080/create_project",
         {
