@@ -54,8 +54,24 @@
     </header>
     <div class="body-container">
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
-        <div class="dashboard">
-            <p class="breadcrumb"> Add a Person</p>
+        <div id="login-container">
+            <h2>Create an Account</h2>
+            <input type="text" placeholder="Name" id="input-name" required>
+            <input type="text" placeholder="Profile" id="input-profile" required>
+            <input type="text" placeholder="Email" id="input-email" required>
+            <input type="text" placeholder="Username" id="input-user_id" required>
+            <select class="person-select" id="input-type">
+                    <option value="0">Select person type:</option>
+                    <option value="1">Student</option>
+                    <option value="2">Faculty Advisor</option>
+                    <option value="3">Manager</option>
+                    <option value="4">Advisor</option>
+            </select>
+            <input type="password" placeholder="Password" id="input-password" required>
+            <button type="submit" id="add-person-submit" class="submit">Create Account</button>
+            <a class="links" href="login.html">Already have an account? Login.</a>
+        </div>
+        <!-- <div class="dashboard">
             <h2>Add a Person</h2>
             <div class="input-form">
                 <input type="text" placeholder="Name" id="input-name" required>
@@ -72,6 +88,6 @@
                 <input type="password" placeholder="Password" id="input-password" required>
             </div>
             <button type="submit" id="add-person-submit" class="submit">Add Person</button>
-        </div>
+        </div> -->
     </div>
 </body>

@@ -39,6 +39,12 @@ header {
     margin: 5%;
 }
 
+.links {
+    color: grey;
+    font-size: 12pt;
+    padding-top: 3%;
+}
+
 .dashboard {
     background-color: white;
     color: black;
@@ -62,6 +68,32 @@ header {
     height: 80%;
     width: 100%;
     padding: 3%;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+}
+
+.nav a {
+    margin-right: 1%;
+}
+
+.nav2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.nav-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 15%;
+    margin-right: 1%;
 }
 
 .breadcrumb {
@@ -234,6 +266,15 @@ table th {
 
 .submit {
     align-self: center;
+}
+
+#select-input {
+    background-color: #eee;
+    border: none;
+    border-radius: 5px;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 100%;
 }
 
 .person-select {

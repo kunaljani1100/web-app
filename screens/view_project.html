@@ -33,17 +33,65 @@
                     var deliverables = project.deliverables;
                     var people = project.people;
                     $("#project-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +description+ '</th><th>' + outcome + '</th></tr>');
-                    deliverables.forEach(deliverable => $("#deliverables table").append('<tr class="table-cell"><th>' + deliverable.deliverableName + '</th><th>' + deliverable.deliverableDescription + '</th><th>' + deliverable.leader + '</th></tr>'));
-                    people.forEach(person => $("#people table").append('<tr class="table-cell"><th>' + person.userId + '</th></tr>'));
+                    deliverables.forEach(deliverable => $("#deliverables table").append('<tr class="table-cell"><th>' + deliverable.deliverableName + '</th><th>' + deliverable.deliverableDescription + '</th><th>' + deliverable.leader + '</th><th><a href="" id="delete-deliverable" value=' + deliverable.deliverableId + '>Delete</a></th></tr>'));
+                    people.forEach(person => $("#people table").append('<tr class="table-cell"><th>' + person.userId + '</th><th><a href="" id="delete-person" value=' + person.personId + '>Delete</a></th></tr>'));
+                });
+
+                $.ajax({
+                    url: 'http://localhost:8080/get_communication/' +localStorage.getItem("person_id") +"/"+localStorage.getItem("project_id"),
+                    type: 'get',
+                    success: function(data, response) {
+                        var msg = "";
+                        var users = [];
+                        if(response) {
+                            msg = "List of comminications successfully!";
+                            communications = data.result;
+                        } else {
+                            msg = "Error retrieving people.";
+                        }
+                        //alert(msg);
+                        //alert(users);
+
+                        communications.forEach(communication => {
+                            name = communication.receiver[0].userId;
+                            summary = communication.summary;
+                            $("#communication-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +summary+ '</th></tr>');
+                        });
+                    }
                 });
 
                 $("button").click(function(){
                   localStorage.setItem("project_id",alert($(this).val()));
                   window.location.href = "home.html";
                 });
+
+                $("#delete-deliverable").click(function() {
+                    $.ajax({
+                        url: 'http://localhost:8080/delete_deliverable/' +project_id+ '/'+ $(this).val(),
+                        type:'delete',
+                        success:function(response){
+                            if(response){
+                            alert("Deliverable deleted successfully");
+                            window.location.href = "view_project.html";
+                            }
+                        }
+                    });
+                });
+
+                $("#delete-person").click(function(){
+                    $.ajax({
+                        url: 'http://localhost:8080/pop_project_member/' +project_id+ '/'+ $(this).val(),
+                        type:'delete',
+                        success:function(response){
+                            if(response){
+                                alert(response["message"]);
+                                window.location.href = "view_project.html";
+                            }
+                        }
+                    });
+                });
             }
         });
-
     });
     </script>
 </head>
@@ -56,75 +104,47 @@
     <div class="body-container" id = "body-container">
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
         <div class="dashboard">
-            <p class="breadcrumb"><a href="home.html">Home</a> / View Project</p>
-            <a href="delete_deliverable.html">Delete deliverable</a>
-            <a href="delete_project_member.html">Delete person</a>
-            <div class="row">
-                <div id="project-info">
-                    <h2>Project Info</h2>
-                    <table>
-                        <tr class="table-header">
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Success Metrics</th>
-                        </tr>
-                        <!-- <tr class="table-cell">
-                            <th class="project_name"></th>
-                            <th class="descrption"></th>
-                            <th class="metrics"></th>
-                        </tr> -->
-                    </table>
-                </div>
+            <p class="breadcrumb"><a href="admin_home.html">Home</a> / <a href="home.html">My Project Dashboard</a> / View Project</p>
+            <!-- <a href="delete_deliverable.html">Delete deliverable</a>
+            <a href="delete_project_member.html">Delete person</a> -->
+            <div id="project-info">
+                <h2>Project Info</h2>
+                <table>
+                    <tr class="table-header">
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Success Metrics</th>
+                    </tr>
+                </table>
             </div>
-            <div class="row">
-                <div id="deliverables">
-                    <h2>Deliverables</h2>
-                    <table>
-                        <tr class="table-header">
-                            <th>Deliverable</th>
-                            <th>Description</th>
-                            <th>Leader</th>
-                        </tr>
-                        <!-- <tr class="table-cell">
-                            <th class="deliverable_name"></th>
-                            <th class="deliverable_descrption"></th>
-                            <th class="leader"></th>
-                            <th class="deadline"></th>
-                        </tr> -->
-                    </table>
-                </div>
-              </div>
-                <div class="row">
-                  <div id="people">
-                      <h2>People</h2>
-                      <table>
-                          <tr class="table-header">
-                              <th>People</th>
-                          </tr>
-                          <!-- <tr class="table-cell">
-                              <th class="deliverable_name"></th>
-                              <th class="deliverable_descrption"></th>
-                              <th class="leader"></th>
-                              <th class="deadline"></th>
-                          </tr> -->
-                      </table>
-                  </div>
-              </div>
-                <!-- <div id="budget">
-                    <h2>Budget</h2>
-                    <table>
-                        <tr>
-                            <th>Item</th>
-                            <th>Projected Cost</th>
-                            <th>Actual Cost</th>
-                        </tr>
-                        <tr class="table-cell">
-                            <th class="item"></th>
-                            <th class="projected_cost"></th>
-                            <th class="actual_cost"></th>
-                        </tr>
-                    </table>
-                </div> -->
+            <div id="deliverables">
+                <h2>Deliverables</h2>
+                <table>
+                    <tr class="table-header">
+                        <th>Deliverable</th>
+                        <th>Description</th>
+                        <th>Leader</th>
+                        <th>Delete</th>
+                    </tr>
+                </table>
+            </div>
+            <div id="people">
+                <h2>People</h2>
+                <table>
+                    <tr class="table-header">
+                        <th>Name</th>
+                        <th>Delete</th>
+                    </tr>
+                </table>
+            </div>
+            <div id="communication">
+                <h2>Communication</h2>
+                <table>
+                    <tr class="table-header">
+                        <th>Receiver</th>
+                        <th>Summary</th>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

@@ -8,9 +8,9 @@ $(document).ready(function() {
         e.preventDefault();
         window.location.href = "change_password.html";
     })
-    $("#add-person").on("click", (e) => {
+    $("#project-dashboard").on("click", (e) => {
         e.preventDefault();
-        window.location.href = "add_person.html";
+        window.location.href = "home.html";
     })
     $("#view-projects").on("click", (e) => {
         e.preventDefault();

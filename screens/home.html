@@ -30,10 +30,6 @@
             e.preventDefault();
             window.location.href = "view_communication.html";
         })
-        // $("#add-communication").on("click", (e) => {
-        //     e.preventDefault();
-        //     window.location.href = "add_communication.html";
-        // })
     });
     </script>
 </head>
@@ -45,14 +41,20 @@
     </header>
     <div class="body-container" id = "body-container">
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
-        <a href="admin_home.html">Admin Home</a>
         <div class="dashboard">
-            <div class="row">
-                <div class="square" id="add-person-to-project">
-                    <h2>Add Person To Project</h2>
+            <div class="nav2">
+                <p class="breadcrumb"><a href="admin_home.html">Home</a> / My Project Dashboard</p>
+                <div class="nav-right">
+                    <a href="" id="change-password">Change Password</a>
+                    <a href="login.html">Logout</a>
                 </div>
+            </div>
+            <div class="row">
                 <div class="square" id="view-project">
                     <h2>View My Projects</h2>
+                </div>
+                <div class="square" id="add-person-to-project">
+                    <h2>Add Person To Project</h2>
                 </div>
             </div>
             <div class="row">
@@ -63,11 +65,11 @@
                     <h2>Add New Communication</h2>
                 </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="square" id="view_communication">
                     <h2>View Communication</h2>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </body>

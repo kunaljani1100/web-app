@@ -30,7 +30,7 @@
                     outcome = project.successMetrics;
                     description = project.description;
                     var deliverables = project.deliverables;
-                    $("#project-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +description+ '</th><th>' + outcome + '</th><th>' + '<button value = ' + project.projectId + '>View Project</button>' + '</th></tr>');
+                    $("#project-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +description+ '</th><th>' + outcome + '</th><th><a href="" id="view-project" value=' + project.projectId + '>View project</a></th><th><a href="" id="delete-project" value=' + project.projectId + '>Delete</a></th></tr>');
                     deliverables.forEach(deliverable => $("#deliverables table").append('<tr class="table-cell"><th>' + deliverable.deliverableName + '</th><th>' + deliverable.deliverableDescription + '</th><th>' + deliverable.leader + '</th><th>' + deliverable.deadline + '</th></tr>'));
                 });
 
@@ -39,6 +39,18 @@
                   window.location.href = "home.html";
                 });
 
+                $("#delete-project").click(function(){
+                    $.ajax({
+                      url: 'http://localhost:8080/delete_project/' + $(this).val(),
+                      type:'delete',
+                      success:function(data,response){
+                        if(response){
+                          alert("Project deleted successfully");
+                          window.location.href = "view_all_projects.html";
+                        }
+                      }
+                    });
+                });
             }
         });
 
@@ -55,7 +67,7 @@
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
         <div class="dashboard">
             <p class="breadcrumb"><a href="admin_home.html">Home</a> / View Project</p>
-            <a href="delete_project.html">Delete Project</a>
+            <!-- <a href="delete_project.html">Delete Project</a> -->
                 <div id="project-info">
                     <h2>Projects</h2>
                     <table>
@@ -64,6 +76,7 @@
                             <th>Description</th>
                             <th>Success Metrics</th>
                             <th>Go To Project</th>
+                            <th>Delete Project</th>
                         </tr>
                     </table>
                 </div>
