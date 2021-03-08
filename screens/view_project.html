@@ -12,6 +12,7 @@
         console.log("Project ID = " + project_id);
         var name;
         var projects = [];
+        var userId = "";
 
         $.ajax({
             url: 'http://localhost:8080/projects/' + project_id,
@@ -33,19 +34,40 @@
                     var deliverables = project.deliverables;
                     var people = project.people;
                     $("#project-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +description+ '</th><th>' + outcome + '</th></tr>');
-                    deliverables.forEach(deliverable => $("#deliverables table").append('<tr class="table-cell"><th>' + deliverable.deliverableName + '</th><th>' + deliverable.deliverableDescription + '</th><th>' + deliverable.leader + '</th><th><a href="" id="delete-deliverable" value=' + deliverable.deliverableId + '>Delete</a></th></tr>'));
+                    deliverables.forEach(deliverable => {
+                      //Get receiver
+                      $.ajax({
+                          url: 'http://localhost:8080/get_user_id/' + deliverable.leader,
+                          type: 'get',
+                          success: function(data, response) {
+                              var msg = "";
+                              var users = [];
+                              if(response) {
+                                  msg = "List of comminications successfully!";
+                                  username = data.user_id;
+                                  summary = communication.summary;
+                                  //alert(username);
+                                  $("#deliverables table").append('<tr class="table-cell"><th>' + deliverable.deliverableName + '</th><th>' + deliverable.deliverableDescription + '</th><th>' + username + '</th><th><a href="" id="delete-deliverable" value=' + deliverable.deliverableId + '>Delete</a></th></tr>');
+                              } else {
+                                  msg = "Error getting user ID.";
+                              }
+                          }
+                      });
+                      //End get receiver
+                    });
                     people.forEach(person => $("#people table").append('<tr class="table-cell"><th>' + person.userId + '</th><th><a href="" id="delete-person" value=' + person.personId + '>Delete</a></th></tr>'));
                 });
 
                 $.ajax({
-                    url: 'http://localhost:8080/get_communication/' +localStorage.getItem("person_id") +"/"+localStorage.getItem("project_id"),
+                    url: 'http://localhost:8080/get_messages_of_reciever/' +localStorage.getItem("person_id") +"/"+localStorage.getItem("project_id"),
                     type: 'get',
                     success: function(data, response) {
                         var msg = "";
                         var users = [];
                         if(response) {
                             msg = "List of comminications successfully!";
-                            communications = data.result;
+                            communications = data.communications;
+                            //alert(communications)
                         } else {
                             msg = "Error retrieving people.";
                         }
@@ -53,10 +75,30 @@
                         //alert(users);
 
                         communications.forEach(communication => {
-                            name = communication.receiver[0].userId;
-                            summary = communication.summary;
-                            $("#communication-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +summary+ '</th></tr>');
-                        });
+                            name = communication.senderId;
+                            var username;
+                            //Get receiver
+                            $.ajax({
+                                url: 'http://localhost:8080/get_user_id/' +name,
+                                type: 'get',
+                                success: function(data, response) {
+                                    var msg = "";
+                                    var users = [];
+                                    if(response) {
+                                        msg = "List of comminications successfully!";
+                                        username = data.user_id;
+                                        summary = communication.summary;
+                                        //alert(username);
+                                        $("#communication table").append('<tr class="table-cell"><th>' + username + '</th><th>' +summary+ '</th></tr>');
+
+                                    } else {
+                                        msg = "Error getting user ID.";
+                                    }
+                                }
+                            });
+                            //End get receiver
+
+                            });
                     }
                 });
 
@@ -141,7 +183,7 @@
                 <h2>Communication</h2>
                 <table>
                     <tr class="table-header">
-                        <th>Receiver</th>
+                        <th>Sender</th>
                         <th>Summary</th>
                     </tr>
                 </table>
