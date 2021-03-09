@@ -30,18 +30,21 @@
                     outcome = project.successMetrics;
                     description = project.description;
                     var deliverables = project.deliverables;
-                    $("#project-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +description+ '</th><th>' + outcome + '</th><th><a href="" id="view-project" value=' + project.projectId + '>View project</a></th><th><a href="" id="delete-project" value=' + project.projectId + '>Delete</a></th></tr>');
+                    $("#project-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +description+ '</th><th>' + outcome + '</th><th><button id="view-project" value="v-' + project.projectId + '">View project</button></th><th><button value="d-' + project.projectId +'"">Delete</button></th></tr>');
                     deliverables.forEach(deliverable => $("#deliverables table").append('<tr class="table-cell"><th>' + deliverable.deliverableName + '</th><th>' + deliverable.deliverableDescription + '</th><th>' + deliverable.leader + '</th><th>' + deliverable.deadline + '</th></tr>'));
                 });
 
                 $("button").click(function(){
-                  localStorage.setItem("project_id",$(this).val());
-                  window.location.href = "home.html";
-                });
-
-                $("#delete-project").click(function(){
+                  var pid =  $(this).val();
+                  if(pid.includes('v-')){
+                    pid = pid.replace('v-','');
+                    localStorage.setItem("project_id",pid);
+                    window.location.href = "home.html";
+                  }
+                  else{
+                    pid = pid.replace('d-','');
                     $.ajax({
-                      url: 'http://localhost:8080/delete_project/' + $(this).val(),
+                      url: 'http://localhost:8080/delete_project/' + pid,
                       type:'delete',
                       success:function(data,response){
                         if(response){
@@ -50,6 +53,7 @@
                         }
                       }
                     });
+                  }
                 });
             }
         });

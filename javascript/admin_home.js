@@ -10,7 +10,7 @@ $(document).ready(function() {
     })
     $("#project-dashboard").on("click", (e) => {
         e.preventDefault();
-        window.location.href = "home.html";
+        window.location.href = "view_all_projects.html";
     })
     $("#view-projects").on("click", (e) => {
         e.preventDefault();
