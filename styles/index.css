@@ -124,6 +124,14 @@ header {
     background-color: #b30738;
 }
 
+#people {
+    margin-right: 10%;
+}
+
+#communication {
+    margin-left: 10%;
+}
+
 #row1 {
     display: flex;
     flex-direction: row;
@@ -268,16 +276,7 @@ table th {
     align-self: center;
 }
 
-#select-input {
-    background-color: #eee;
-    border: none;
-    border-radius: 5px;
-	padding: 12px 15px;
-	margin: 8px 0;
-	width: 100%;
-}
-
-.person-select {
+.select-input {
 	display: block;
     line-height: 1.3;
     border: 1px solid #aaa;
@@ -296,19 +295,19 @@ table th {
 	background-position: right .7em top 50%, 0 0;
 	background-size: .65em auto, 100%;
 }
-.person-select::-ms-expand {
+.select-input::-ms-expand {
 	display: none;
 }
-.person-select:hover {
+.select-input:hover {
 	border-color: #888;
 }
-.person-select:focus {
+.select-input:focus {
 	border-color: #aaa;
 	box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
 	box-shadow: 0 0 0 3px -moz-mac-focusring;
 	color: #222;
 	outline: none;
 }
-.person-select option {
+.select-input option {
 	font-weight:normal;
 }

@@ -47,7 +47,7 @@
                                   username = data.user_id;
                                   summary = communication.summary;
                                   //alert(username);
-                                  $("#deliverables table").append('<tr class="table-cell"><th>' + deliverable.deliverableName + '</th><th>' + deliverable.deliverableDescription + '</th><th>' + username + '</th><th><a href="" id="delete-deliverable" value=' + deliverable.deliverableId + '>Delete</a></th></tr>');
+                                  $("#deliverables table").append('<tr class="table-cell"><th>' + deliverable.deliverableName + '</th><th>' + deliverable.deliverableDescription + '</th><th>' + username + '</th><th><button value="d-' + deliverable.deliverableId + '">Delete</button></th></tr>');
                               } else {
                                   msg = "Error getting user ID.";
                               }
@@ -55,7 +55,7 @@
                       });
                       //End get receiver
                     });
-                    people.forEach(person => $("#people table").append('<tr class="table-cell"><th>' + person.userId + '</th><th><a href="" id="delete-person" value=' + person.personId + '>Delete</a></th></tr>'));
+                    people.forEach(person => $("#people table").append('<tr class="table-cell"><th>' + person.userId + '</th><th><button value="p-' + person.personId + '">Delete</button></th></tr>'));
                 });
 
                 $.ajax({
@@ -102,35 +102,40 @@
                     }
                 });
 
-                $("button").click(function(){
-                  localStorage.setItem("project_id",alert($(this).val()));
-                  window.location.href = "home.html";
-                });
+                // $("button").click(function(){
+                //   localStorage.setItem("project_id",alert($(this).val()));
+                //   window.location.href = "home.html";
+                // });
 
-                $("#delete-deliverable").click(function() {
-                    $.ajax({
-                        url: 'http://localhost:8080/delete_deliverable/' +project_id+ '/'+ $(this).val(),
-                        type:'delete',
-                        success:function(response){
-                            if(response){
-                            alert("Deliverable deleted successfully");
-                            window.location.href = "view_project.html";
-                            }
-                        }
-                    });
-                });
+                $("button").click(function() {
+                    var pid =  $(this).val();
+                    localStorage.setItem("project_id",pid);
 
-                $("#delete-person").click(function(){
-                    $.ajax({
-                        url: 'http://localhost:8080/pop_project_member/' +project_id+ '/'+ $(this).val(),
-                        type:'delete',
-                        success:function(response){
-                            if(response){
-                                alert(response["message"]);
+                    if(pid.includes('d-')) {
+                        pid = pid.replace('d-','');
+                        $.ajax({
+                            url: 'http://localhost:8080/delete_deliverable/' +project_id+ '/'+ pid,
+                            type:'delete',
+                            success:function(response){
+                                if(response){
+                                alert("Deliverable deleted successfully");
                                 window.location.href = "view_project.html";
+                                }
                             }
-                        }
-                    });
+                        });
+                    } else {
+                        pid = pid.replace('p-','');
+                        $.ajax({
+                            url: 'http://localhost:8080/pop_project_member/' +project_id+ '/'+ pid,
+                            type:'delete',
+                            success:function(response){
+                                if(response){
+                                    alert(response["message"]);
+                                    window.location.href = "view_project.html";
+                                }
+                            }
+                        });
+                    }
                 });
             }
         });
@@ -146,9 +151,7 @@
     <div class="body-container" id = "body-container">
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
         <div class="dashboard">
-            <p class="breadcrumb"><a href="admin_home.html">Home</a> / <a href="home.html">My Project Dashboard</a> / View Project</p>
-            <!-- <a href="delete_deliverable.html">Delete deliverable</a>
-            <a href="delete_project_member.html">Delete person</a> -->
+            <p class="breadcrumb"><a href="admin_home.html">Home</a> / <a href="home.html">Project Dashboard</a> / View Project</p>
             <div id="project-info">
                 <h2>Project Info</h2>
                 <table>
@@ -170,23 +173,25 @@
                     </tr>
                 </table>
             </div>
-            <div id="people">
-                <h2>People</h2>
-                <table>
-                    <tr class="table-header">
-                        <th>Name</th>
-                        <th>Delete</th>
-                    </tr>
-                </table>
-            </div>
-            <div id="communication">
-                <h2>Communication</h2>
-                <table>
-                    <tr class="table-header">
-                        <th>Sender</th>
-                        <th>Summary</th>
-                    </tr>
-                </table>
+            <div class="row">
+                <div id="people">
+                    <h2>People</h2>
+                    <table>
+                        <tr class="table-header">
+                            <th>Name</th>
+                            <th>Delete</th>
+                        </tr>
+                    </table>
+                </div>
+                <div id="communication">
+                    <h2>Communication</h2>
+                    <table>
+                        <tr class="table-header">
+                            <th>Sender</th>
+                            <th>Summary</th>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
