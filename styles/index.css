@@ -311,3 +311,12 @@ table th {
 .select-input option {
 	font-weight:normal;
 }
+
+.link-button {
+    background-color: white;
+    border-color: white;
+    color: black;
+    text-decoration-line: underline;
+    text-transform: none;
+    font-size: 12pt;
+}

@@ -1,30 +1,19 @@
-$(document).ready(function() {
-    $("#create-project-submit").on("click", (e) => {
-        e.preventDefault();
-
-        var project = $("#input-project").val().trim();
-        var description = $("#input-description").val().trim();
-        var metrics = $("#input-metrics").val().trim();
-
-        if(project != "") {
-            $.ajax({
-                url: '/create_project',
-                type: 'post',
-                data: {
-                    project_name: project,
-                    // description: description,
-                    outcome: metrics
-                },
-                success: function(response) {
-                    var msg = "";
-                    if(response == 1) {
-                        msg = "Project created successfully!";
-                    } else {
-                        msg = "Error creating project.";
-                    }
-                    alert(msg);
-                }
-            });
-        }
-    })
+$(document).ready(function(){
+    var person_id = localStorage.getItem("person_id");
+    
+    $("button").click(function(){
+        const response = $.post("http://localhost:8080/create_project",
+        {
+            "person_id": person_id,
+            "project_name": document.getElementById("project_name").value,
+            "description": document.getElementById("description").value,
+            "success_metrics": document.getElementById("success_metrics").value
+        },
+        function(response){
+            alert(response["message"]);
+            if(response["message"].includes("successfully created")){
+                window.location.href = "home.html";
+            }
+        });
+    });
 });

@@ -5,61 +5,7 @@
     <title>FIH Project Planner</title>
     <link rel="stylesheet" href="../styles/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-    $(document).ready(function() {
-        var person_id = localStorage.getItem("person_id");
-        console.log("Person ID = " + person_id);
-        var name;
-        var projects = [];
-
-        $.ajax({
-            url: 'http://localhost:8080/get_projects_by_person_id/' + person_id,
-            type: 'get',
-            success: function(data, response) {
-                var msg = "";
-                if(response) {
-                    msg = "Project retrieved successfully!";
-                    projects = data.projects;
-                } else {
-                    msg = "Error retrieving project.";
-                }
-                //alert(msg);
-
-                projects.forEach(project => {
-                    name = project.projectName;
-                    outcome = project.successMetrics;
-                    description = project.description;
-                    var deliverables = project.deliverables;
-                    $("#project-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +description+ '</th><th>' + outcome + '</th><th><button id="view-project" value="v-' + project.projectId + '">View project</button></th><th><button value="d-' + project.projectId +'"">Delete</button></th></tr>');
-                    deliverables.forEach(deliverable => $("#deliverables table").append('<tr class="table-cell"><th>' + deliverable.deliverableName + '</th><th>' + deliverable.deliverableDescription + '</th><th>' + deliverable.leader + '</th><th>' + deliverable.deadline + '</th></tr>'));
-                });
-
-                $("button").click(function(){
-                  var pid =  $(this).val();
-                  if(pid.includes('v-')){
-                    pid = pid.replace('v-','');
-                    localStorage.setItem("project_id",pid);
-                    window.location.href = "home.html";
-                  }
-                  else{
-                    pid = pid.replace('d-','');
-                    $.ajax({
-                      url: 'http://localhost:8080/delete_project/' + pid,
-                      type:'delete',
-                      success:function(data,response){
-                        if(response){
-                          alert("Project deleted successfully");
-                          window.location.href = "view_all_projects.html";
-                        }
-                      }
-                    });
-                  }
-                });
-            }
-        });
-
-    });
-    </script>
+    <script src="../javascript/view_all_projects.js"></script>
 </head>
 
 <body>
@@ -70,8 +16,7 @@
     <div class="body-container">
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
         <div class="dashboard">
-            <p class="breadcrumb"><a href="admin_home.html">Home</a> / View Project</p>
-            <!-- <a href="delete_project.html">Delete Project</a> -->
+            <p class="breadcrumb"><a href="home.html">Home</a> / View Project</p>
                 <div id="project-info">
                     <h2>Projects</h2>
                     <table>

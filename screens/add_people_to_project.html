@@ -5,58 +5,7 @@
     <title>FIH Project Planner</title>
     <link rel="stylesheet" href="../styles/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-    $(document).ready(function() {
-      $("#body-container").append("<h1>" + localStorage.getItem("project_id") + "</h1>")
-
-        $.ajax({
-            url: 'http://localhost:8080/get_people/',
-            type: 'get',
-            success: function(data, response) {
-                var msg = "";
-                var users = [];
-                if(response) {
-                    msg = "List of people retrieved successfully!";
-                    people = response["result"];
-                    users = data.result;
-                } else {
-                    msg = "Error retrieving people.";
-                }
-                //alert(msg);
-                //alert(users);
-
-                users.forEach(person => {
-                    personId = person.personId;
-                    name = person.name;
-                    emailId = person.emailId;
-                    type = person.type;
-                    profile = person.profile;
-                    $("#people-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +emailId+ '</th><th>' + type + '</th><th>' + profile + '</th><th><button value = '+ personId +'> + </button>Add</th></tr>');
-                });
-
-                $("button").click(function(){
-                  //alert($(this).val());
-                  //alert(localStorage.getItem("project_id"));
-
-                  const response = $.post("http://localhost:8080/add_person_to_project",
-                  {
-                     "person_id": $(this).val(),
-                     "project_id": localStorage.getItem("project_id")
-                  },
-                  function(response){
-                    alert(response["message"]);
-                    if(response["message"] == "Person successfully added to project."){
-                      window.location.href = "view_project.html";
-                    }
-                  });
-
-
-                });
-            }
-        });
-    });
-
-    </script>
+    <script src="../javascript/add_people_to_project.js"></script>
 </head>
 
 <body>
@@ -67,7 +16,7 @@
     <div class="body-container" id = "body-container">
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
         <div class="dashboard">
-                <p class="breadcrumb"><a href="admin_home.html">Home</a> / <a href="home.html">Project Dashboard</a> / View People</p>
+                <p class="breadcrumb"><a href="home.html">Home</a> / <a href="project_dash.html">Project Dashboard</a> / View People</p>
                 <div id="people-info">
                     <h2>People</h2>
                     <table>

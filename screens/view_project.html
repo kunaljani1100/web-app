@@ -5,142 +5,7 @@
     <title>FIH Project Planner</title>
     <link rel="stylesheet" href="../styles/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-    $(document).ready(function() {
-      $("#body-container").append("<h1>" + localStorage.getItem("project_id") + "</h1>")
-        var project_id = localStorage.getItem("project_id");
-        console.log("Project ID = " + project_id);
-        var name;
-        var projects = [];
-        var userId = "";
-
-        $.ajax({
-            url: 'http://localhost:8080/projects/' + project_id,
-            type: 'get',
-            success: function(data, response) {
-                var msg = "";
-                if(response) {
-                    msg = "Project retrieved successfully!";
-                    projects = data.projects;
-                } else {
-                    msg = "Error retrieving project.";
-                }
-                //alert(msg);
-
-                projects.forEach(project => {
-                    name = project.projectName;
-                    outcome = project.successMetrics;
-                    description = project.description;
-                    var deliverables = project.deliverables;
-                    var people = project.people;
-                    $("#project-info table").append('<tr class="table-cell"><th>' + name + '</th><th>' +description+ '</th><th>' + outcome + '</th></tr>');
-                    deliverables.forEach(deliverable => {
-                      //Get receiver
-                      $.ajax({
-                          url: 'http://localhost:8080/get_user_id/' + deliverable.leader,
-                          type: 'get',
-                          success: function(data, response) {
-                              var msg = "";
-                              var users = [];
-                              if(response) {
-                                  msg = "List of comminications successfully!";
-                                  username = data.user_id;
-                                  summary = communication.summary;
-                                  //alert(username);
-                                  $("#deliverables table").append('<tr class="table-cell"><th>' + deliverable.deliverableName + '</th><th>' + deliverable.deliverableDescription + '</th><th>' + username + '</th><th><button value="d-' + deliverable.deliverableId + '">Delete</button></th></tr>');
-                              } else {
-                                  msg = "Error getting user ID.";
-                              }
-                          }
-                      });
-                      //End get receiver
-                    });
-                    people.forEach(person => $("#people table").append('<tr class="table-cell"><th>' + person.userId + '</th><th><button value="p-' + person.personId + '">Delete</button></th></tr>'));
-                });
-
-                $.ajax({
-                    url: 'http://localhost:8080/get_messages_of_reciever/' +localStorage.getItem("person_id") +"/"+localStorage.getItem("project_id"),
-                    type: 'get',
-                    success: function(data, response) {
-                        var msg = "";
-                        var users = [];
-                        if(response) {
-                            msg = "List of comminications successfully!";
-                            communications = data.communications;
-                            //alert(communications)
-                        } else {
-                            msg = "Error retrieving people.";
-                        }
-                        //alert(msg);
-                        //alert(users);
-
-                        communications.forEach(communication => {
-                            name = communication.senderId;
-                            var username;
-                            //Get receiver
-                            $.ajax({
-                                url: 'http://localhost:8080/get_user_id/' +name,
-                                type: 'get',
-                                success: function(data, response) {
-                                    var msg = "";
-                                    var users = [];
-                                    if(response) {
-                                        msg = "List of comminications successfully!";
-                                        username = data.user_id;
-                                        summary = communication.summary;
-                                        //alert(username);
-                                        $("#communication table").append('<tr class="table-cell"><th>' + username + '</th><th>' +summary+ '</th></tr>');
-
-                                    } else {
-                                        msg = "Error getting user ID.";
-                                    }
-                                }
-                            });
-                            //End get receiver
-
-                            });
-                    }
-                });
-
-                // $("button").click(function(){
-                //   localStorage.setItem("project_id",alert($(this).val()));
-                //   window.location.href = "home.html";
-                // });
-
-                $("button").click(function() {
-                    var pid =  $(this).val();
-                    localStorage.setItem("project_id",pid);
-
-                    if(pid.includes('d-')) {
-                        pid = pid.replace('d-','');
-                        $.ajax({
-                            url: 'http://localhost:8080/delete_deliverable/' +project_id+ '/'+ pid,
-                            type:'delete',
-                            success:function(response){
-                                if(response){
-                                alert("Deliverable deleted successfully");
-                                window.location.href = "view_project.html";
-                                }
-                            }
-                        });
-                    } else {
-                        pid = pid.replace('p-','');
-                        $.ajax({
-                            url: 'http://localhost:8080/pop_project_member/' +project_id+ '/'+ pid,
-                            type:'delete',
-                            success:function(response){
-                                if(response){
-                                    alert(response["message"]);
-                                    window.location.href = "view_project.html";
-                                }
-                            }
-                        });
-                    }
-                });
-            }
-        });
-    });
-    </script>
+    <script src="../javascript/view_project.js"></script>
 </head>
 
 <body>
@@ -151,7 +16,7 @@
     <div class="body-container" id = "body-container">
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
         <div class="dashboard">
-            <p class="breadcrumb"><a href="admin_home.html">Home</a> / <a href="home.html">Project Dashboard</a> / View Project</p>
+            <p class="breadcrumb"><a href="home.html">Home</a> / <a href="project_dash.html" id="home">Project Dashboard</a> / View Project</p>
             <div id="project-info">
                 <h2>Project Info</h2>
                 <table>
@@ -169,7 +34,7 @@
                         <th>Deliverable</th>
                         <th>Description</th>
                         <th>Leader</th>
-                        <th>Delete</th>
+                        <th>Complete</th>
                     </tr>
                 </table>
             </div>
@@ -179,7 +44,6 @@
                     <table>
                         <tr class="table-header">
                             <th>Name</th>
-                            <th>Delete</th>
                         </tr>
                     </table>
                 </div>

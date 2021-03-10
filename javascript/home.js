@@ -1,26 +1,18 @@
 $(document).ready(function() {
-    var person_id = "person-g2nSBbuI"; 
-    localStorage.setItem("person_id", person_id);
-
-    // regular user
-    $("#add-project").on("click", (e) => {
+    $("#create-project").on("click", (e) => {
         e.preventDefault();
         window.location.href = "add_project.html";
     })
-    $("#view-project").on("click", (e) => {
+    $("#change-password").on("click", (e) => {
         e.preventDefault();
-        window.location.href = "view_project.html";
+        window.location.href = "change_password.html";
     })
-    $("#add-deliverable").on("click", (e) => {
+    $("#view-projects").on("click", (e) => {
         e.preventDefault();
-        window.location.href = "add_deliverable.html";
+        window.location.href = "view_all_projects.html";
     })
-    $("#add-communication").on("click", (e) => {
+    $("#view-people").on("click", (e) => {
         e.preventDefault();
-        window.location.href = "add_communication.html";
+        window.location.href = "view_all_people.html";
     })
-    // $("#add-communication").on("click", (e) => {
-    //     e.preventDefault();
-    //     window.location.href = "add_communication.html";
-    // })
 });

@@ -5,33 +5,7 @@
     <title>FIH Project Planner</title>
     <link rel="stylesheet" href="../styles/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-    $(document).ready(function() {
-
-        $("#body-container").append("<h1>" + localStorage.getItem("project_id") + "</h1>")
-        // regular user
-        $("#add-person-to-project").on("click", (e) => {
-            e.preventDefault();
-            window.location.href = "add_people_to_project.html";
-        })
-        $("#view-project").on("click", (e) => {
-            e.preventDefault();
-            window.location.href = "view_project.html";
-        })
-        $("#add-deliverable").on("click", (e) => {
-            e.preventDefault();
-            window.location.href = "add_deliverable.html";
-        })
-        $("#add-communication").on("click", (e) => {
-            e.preventDefault();
-            window.location.href = "add_communication.html";
-        })
-        $("#view_communication").on("click", (e) => {
-            e.preventDefault();
-            window.location.href = "view_communication.html";
-        })
-    });
-    </script>
+    <script src="../javascript/home.js"></script>
 </head>
 
 <body>
@@ -39,37 +13,26 @@
         <img id="fih-logo" src="../assets/fih_logo.png" alt="FIH Logo">
         <img id="scu-logo" src="../assets/scu_logo.png" alt="SCU Logo">
     </header>
-    <div class="body-container" id = "body-container">
+    <div class="body-container">
         <h1 id="title">Frugal Innovation Hub Project Planner</h1>
-        <div class="dashboard">
-            <div class="nav2">
-                <p class="breadcrumb"><a href="admin_home.html">Home</a> / Project Dashboard</p>
-                <div class="nav-right">
-                    <a href="" id="change-password">Change Password</a>
-                    <a href="login.html">Logout</a>
+        <div class="admin-dashboard">
+            <div class="nav">
+                <a href="login.html">Logout</a>
+                <a href="" id="change-password">Change Password</a>
+            </div>
+            <div class="row">
+                <div class="square" id="create-project">
+                    <h2>Create New Project</h2>
                 </div>
             </div>
             <div class="row">
-                <div class="square" id="view-project">
-                    <h2>View Project</h2>
+                <div class="square" id="view-projects">
+                    <h2>View My Projects</h2>
                 </div>
-                <div class="square" id="add-person-to-project">
-                    <h2>Add Person To Project</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="square" id="add-deliverable">
-                    <h2>Add New Deliverable</h2>
-                </div>
-                <div class="square" id="add-communication">
-                    <h2>Add New Communication</h2>
+                <div class="square" id="view-people">
+                    <h2>View People</h2>
                 </div>
             </div>
-            <!-- <div class="row">
-                <div class="square" id="view_communication">
-                    <h2>View Communication</h2>
-                </div>
-            </div> -->
         </div>
     </div>
 </body>
