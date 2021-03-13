@@ -15,7 +15,7 @@ $(document).ready(function() {
             } else {
                 msg = "Error retrieving project.";
             }
- 
+
             projects.forEach(project => {
                 var people = project["people"];
                 people.forEach(person=>{
@@ -30,19 +30,19 @@ $(document).ready(function() {
         var person_id = localStorage.getItem("person_id");
         var project_id = localStorage.getItem("project_id");
 
-        $.ajax({
-            url: 'localhost:8080/get_projects_by_person_id/' + person_id,
-            type: 'get',
-            success: function(response, data) {
-                var msg = "";
-                if(response) {
-                    msg = "Project ID retrieved successfully!";
-                    project_id = data.project_id;
-                } else {
-                    msg = "Error retrieving project ID.";
-                }
-            }
-        });
+        // $.ajax({
+        //     url: 'localhost:8080/get_projects_by_person_id/' + person_id,
+        //     type: 'get',
+        //     success: function(response, data) {
+        //         var msg = "";
+        //         if(response) {
+        //             msg = "Project ID retrieved successfully!";
+        //             project_id = data.project_id;
+        //         } else {
+        //             msg = "Error retrieving project ID.";
+        //         }
+        //     }
+        // });
 
         var name = $("#input-deliverable").val().trim();
         var leader = $("#input-owner").val().trim();
